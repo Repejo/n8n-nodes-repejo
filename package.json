@@ -1,16 +1,6 @@
 {
   "name": "n8n-nodes-repejo",
   "version": "0.1.1",
-  "description": "n8n community nodes for Repejo webhook integration",
-  "keywords": [
-    "n8n-community-node-package",
-    "repejo",
-    "webhooks",
-    "donations",
-    "payments"
-  ],
-  "license": "MIT",
-  "homepage": "https://repejo.se",
   "author": {
     "name": "Repejo",
     "email": "support@repejo.se"
@@ -20,24 +10,8 @@
     "url": "https://github.com/repejo/n8n-nodes-repejo.git"
   },
   "main": "index.js",
-  "scripts": {
-    "build": "tsc && gulp build:icons",
-    "dev": "tsc --watch",
-    "format": "prettier nodes --write",
-    "lint": "eslint nodes",
-    "lintfix": "eslint nodes --fix",
-    "prepublishOnly": "npm run build && npm run lint -s"
-  },
-  "files": [
-    "dist"
-  ],
-  "n8n": {
-    "n8nNodesApiVersion": 1,
-    "nodes": [
-      "dist/nodes/RepejoTrigger/RepejoTrigger.node.js"
-    ]
-  },
   "devDependencies": {
+    "@n8n/node-cli": "^0.19.0",
     "@types/node": "^22.7.4",
     "@typescript-eslint/eslint-plugin": "^8.45.0",
     "@typescript-eslint/parser": "^8.8.0",
@@ -48,13 +22,37 @@
     "prettier": "^3.3.3",
     "typescript": "^5.6.2"
   },
-  "engines": {
-    "node": ">=18.0.0"
-  },
   "peerDependencies": {
     "n8n-workflow": "*"
   },
-  "dependencies": {
-    "@n8n/node-cli": "^0.19.0"
+  "description": "n8n community nodes for Repejo webhook integration",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "dist"
+  ],
+  "homepage": "https://repejo.se",
+  "keywords": [
+    "n8n-community-node-package",
+    "repejo",
+    "webhooks",
+    "donations",
+    "payments"
+  ],
+  "license": "MIT",
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "nodes": [
+      "dist/nodes/RepejoTrigger/RepejoTrigger.node.js"
+    ]
+  },
+  "scripts": {
+    "build": "tsc && gulp build:icons",
+    "dev": "tsc --watch",
+    "format": "prettier nodes --write",
+    "lint": "eslint nodes",
+    "lintfix": "eslint nodes --fix",
+    "prepublishOnly": "npm run build && npm run lint -s"
   }
 }
