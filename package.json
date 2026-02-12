@@ -53,5 +53,8 @@
   },
   "peerDependencies": {
     "n8n-workflow": "*"
+  },
+  "dependencies": {
+    "@n8n/node-cli": "^0.19.0"
   }
 }
