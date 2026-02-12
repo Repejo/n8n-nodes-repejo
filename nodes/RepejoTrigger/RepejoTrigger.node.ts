@@ -131,8 +131,16 @@ export class RepejoTrigger implements INodeType {
 				.update(rawBody, "utf8")
 				.digest("hex");
 
+			const signatureHex = signature
+				.trim()
+				.toLowerCase()
+				.replace(/^sha256=/, "");
+			const signatureBuffer = Buffer.from(signatureHex, "hex");
+			const expectedBuffer = Buffer.from(expectedSignature, "hex");
+
 			if (
-				!timingSafeEqual(Buffer.from(signature), Buffer.from(expectedSignature))
+				signatureBuffer.length !== expectedBuffer.length ||
+				!timingSafeEqual(signatureBuffer, expectedBuffer)
 			) {
 				throw new NodeOperationError(
 					this.getNode(),
