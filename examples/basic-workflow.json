@@ -1,0 +1,88 @@
+{
+  "name": "Repejo Webhook Example",
+  "nodes": [
+    {
+      "parameters": {
+        "events": [
+          "payer.created",
+          "subscription.created"
+        ],
+        "webhookSecret": "your-webhook-secret-here",
+        "validateSignature": true
+      },
+      "name": "Repejo Trigger",
+      "type": "n8n-nodes-repejo.repejoTrigger",
+      "typeVersion": 1,
+      "position": [260, 300],
+      "webhookId": "repejo-webhook"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.event_type}}",
+              "operation": "equal",
+              "value2": "payer.created"
+            }
+          ]
+        }
+      },
+      "name": "Check if New Payer",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [480, 300]
+    },
+    {
+      "parameters": {
+        "message": "Welcome {{$json.data.name}}! Thank you for becoming a donor.",
+        "additionalFields": {}
+      },
+      "name": "Send Welcome Message",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [700, 200]
+    },
+    {
+      "parameters": {
+        "message": "New subscription created for {{$json.data.payer_id}} - Amount: {{$json.data.amount}}",
+        "additionalFields": {}
+      },
+      "name": "Log Subscription",
+      "type": "n8n-nodes-base.set", 
+      "typeVersion": 1,
+      "position": [700, 400]
+    }
+  ],
+  "connections": {
+    "Repejo Trigger": {
+      "main": [
+        [
+          {
+            "node": "Check if New Payer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check if New Payer": {
+      "main": [
+        [
+          {
+            "node": "Send Welcome Message",
+            "type": "main", 
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Log Subscription",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}
